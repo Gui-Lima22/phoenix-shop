@@ -49,7 +49,7 @@ const ProductsFilter = ({isOpen, setOpen}) => {
                                     </TransitionChild>
                                     <div className="bg-gray-200 flex h-full flex-col overflow-y-scroll py-6 shadow-xl">
                                         <div className="px-4 sm:px-6 mb-2">
-                                            <DialogTitle className="text-lg leading-6 text-gray-900">
+                                            <DialogTitle className="text-lg leading-6 text-gray-600">
                                                 Filtros
                                             </DialogTitle>
                                         </div>

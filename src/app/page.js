@@ -2,16 +2,16 @@
 
 import Image from "next/image";
 import "./page.css"
+import Background from "../../public/background/background.jpg";
 
 export default function Home() {
     return (
         <main className="home flex">
             <div className="bg-image">
                 <Image
-                    fill
-                    className="background"
-                    src="/background.jpg"
-                    alt="Vercel Logo"
+                    className="background h-full w-full object-cover object-center"
+                    src={Background}
+                    alt=""
                     quality={100}
                     priority
                 />

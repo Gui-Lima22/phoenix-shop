@@ -8,7 +8,7 @@ const ProductsList = () => {
 
     return (
         <React.Fragment>
-            <div className="container">
+            <div className="container justify-center">
                 {
                     data?.map(item =>
                         <React.Fragment key={item.id}>

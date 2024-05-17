@@ -42,10 +42,6 @@
     font-family: Inter, serif !important;
 }
 
-.background, .mask, .home {
-    height: calc(100vh - 65px) !important;
-}
-
 @media screen and (max-width: 600px) {
     .title-div {
         padding: 12rem 1rem !important;
