@@ -1,7 +1,6 @@
 "use client"
 
-import {useContext, useEffect, useState} from "react";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {useContext, useState} from "react";
 import {Menu, MenuButton, MenuItem, MenuItems, Transition} from "@headlessui/react";
 import {ChevronDownIcon, FunnelIcon} from "@heroicons/react/24/outline";
 import {PhoenixContext} from "@/context/phoenix-context";
@@ -10,13 +9,11 @@ import ProductsFilter from "@/app/list/components/product-filter";
 import "./list.css"
 
 const List = () => {
-    const client = new QueryClient();
-
     const {priority, setPriority} = useContext(PhoenixContext);
     const [isOpen, setOpen] = useState(false);
 
     return (
-        <QueryClientProvider client={client}>
+        <>
             <hr className="spacer mb-4"/>
             <main
                 className="mx-auto max-w-2xl px-4 pb-16 pt-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24">
@@ -82,7 +79,8 @@ const List = () => {
                 <ProductsFilter isOpen={isOpen} setOpen={() => setOpen(!isOpen)}/>
 
             </main>
-        </QueryClientProvider>
+        </>
+
     );
 }
 

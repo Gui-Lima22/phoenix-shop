@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from "next/image";
-import {useProducts} from "@/hooks/useProducts";
 import {formatPrice} from '@/utils/format-price';
+import productService from "@/service/product-service";
 
 const ProductsList = () => {
-    const {data} = useProducts();
+    const [products, setProducts] = useState(undefined);
+
+    useEffect(() => {
+        productService.list().then(({data}) => setProducts(data));
+    }, []);
 
     return (
         <React.Fragment>
             <div className="container justify-center">
                 {
-                    data?.map(item =>
+                    products?.map(item =>
                         <React.Fragment key={item.id}>
                             <a className="card-list cursor-pointer" href={"/product?id=" + item.id}>
                                 <Image
@@ -23,7 +27,7 @@ const ProductsList = () => {
                                 <div className="card-content">
                                     <h3>{item.team}</h3>
                                     <hr className="spacer"/>
-                                    <p>{formatPrice(item.price)}</p>
+                                    <p>R${item.price}</p>
                                 </div>
                             </a>
                         </React.Fragment>
