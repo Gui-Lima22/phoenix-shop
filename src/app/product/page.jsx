@@ -1,11 +1,11 @@
 "use client"
 
-import {useCallback, useContext, useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 import {ChevronLeftIcon, MinusIcon, PlusIcon} from "@heroicons/react/16/solid";
-import Image from "next/image";
 import {PhoenixContext} from "@/context/phoenix-context";
 import productService from "@/service/product-service";
+import Image from "next/image";
 
 const sizes = [
     {name: 'PP', inStock: false},
@@ -29,7 +29,7 @@ export default function Product({searchParams: id}) {
                 setProduct(data);
                 setIsLoading(false);
             });
-    }, []);
+    }, [id.id]);
 
     const  classNames = (...classes) => classes.filter(Boolean).join(' ');
 
@@ -57,6 +57,11 @@ export default function Product({searchParams: id}) {
             newCartList.push(newItem);
 
         setCartStorage(newCartList);
+    }
+
+    const buy = () => {
+        addToCart();
+        window.top.location = "/cart";
     }
 
     return (
@@ -217,14 +222,14 @@ export default function Product({searchParams: id}) {
 
 
                                 <button
-                                    type="button" onClick={addToCart}
+                                    type="button" onClick={() => addToCart()}
                                     className="mt-5 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-3 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                                 >
                                     Adicionar ao carrinho
                                 </button>
 
                                 <button
-                                    type="button"
+                                    type="button" onClick={buy}
                                     className="mt-5 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-800 px-8 py-3 text-base font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                                 >
                                     Comprar

@@ -16,7 +16,7 @@ const ProductsList = () => {
                 {
                     products?.map(item =>
                         <React.Fragment key={item.id}>
-                            <a className="card-list cursor-pointer" href={"/product?id=" + item.id}>
+                            <a className="card-list cursor-pointer shadow" href={"/product?id=" + item.id}>
                                 <Image
                                     src={"/teams/" + item.directory + "/1.jpg"} alt=""
                                     width={256}

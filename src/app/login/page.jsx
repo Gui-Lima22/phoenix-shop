@@ -1,8 +1,14 @@
+"use client"
+
 import React from 'react';
 import Image from "next/image";
 import LoginBackground from "../../../public/background/login-background.jpg";
 
 const Login = () => {
+    const loginSubmit = (formData) => {
+
+    }
+
     return (
         <div className="flex background">
             <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
@@ -18,10 +24,11 @@ const Login = () => {
             <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
                 <div className="max-w-md w-full p-6 lg:p-0 bg-gray-100 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                     <div className="lg:p-8 space-y-4">
-                        <h1 className="text-3xl font-semibold mb-6 text-black text-center">Digite seu e-mail e senha</h1>
+                        <h1 className="text-3xl font-semibold mb-6 text-black text-center">
+                            Digite seu e-mail e senha</h1>
                         <hr className="spacer"/>
 
-                        <div className="space-y-4">
+                        <form action={loginSubmit} className="text-gray-600 space-y-4">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                                 <input type="text" id="email" name="email" className="mt-1 p-2 w-full border border-gray-500
@@ -44,13 +51,13 @@ const Login = () => {
                             </div>
 
                             <div>
-                                <button className="flex w-full justify-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4
+                                <button type="submit" className="flex w-full justify-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4
                                 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center
                                 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                     Entrar
                                 </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

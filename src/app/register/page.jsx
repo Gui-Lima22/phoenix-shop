@@ -1,8 +1,14 @@
+"use client"
+
 import React from 'react';
 import Image from "next/image";
 import RegisterBackground from "../../../public/background/register-background.jpg";
 
 const Register = () => {
+    const save = (formData) => {
+        console.log(formData.get("name"))
+    }
+
     return (
         <div className="flex background">
             <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
@@ -20,42 +26,44 @@ const Register = () => {
                     <div className="lg:p-6 space-y-4">
                         <h1 className="text-3xl font-semibold mb-6 text-black text-center">Cadastre a sua conta</h1>
                         <hr className="spacer"/>
+                        <form className="text-gray-600 space-y-4" action={save}>
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
                                 <input type="text" id="name" name="name" className="mt-1 p-2 w-full border border-gray-500
-                                rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                focus:ring-gray-300 transition-colors duration-300"/>
+                                    rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                    focus:ring-gray-300 transition-colors duration-300"/>
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                                 <input type="text" id="email" name="email" className="mt-1 p-2 w-full border border-gray-500
-                                rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                focus:ring-gray-300 transition-colors duration-300"/>
+                                    rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
+                                    focus:ring-gray-300 transition-colors duration-300"/>
                             </div>
                             <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 space-y-4 lg:space-y-0">
                                 <div>
                                     <label htmlFor="password"
                                            className="block text-sm font-medium text-gray-700">Senha</label>
                                     <input type="password" id="password" name="password" className="mt-1 p-2
-                                    w-full border border-gray-500 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2
-                                    focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"/>
+                                        w-full border border-gray-500 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2
+                                        focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"/>
                                 </div>
                                 <div>
                                     <label htmlFor="password"
                                            className="block text-sm font-medium text-gray-700">Confirmar senha</label>
                                     <input type="password" id="password" name="password" className="mt-1 p-2
-                                    w-full border border-gray-500 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2
-                                    focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"/>
+                                        w-full border border-gray-500 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2
+                                        focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"/>
                                 </div>
                             </div>
 
                             <div>
                                 <button className="flex w-full justify-center text-white bg-gray-700 hover:bg-gray-800 focus:ring-4
-                                focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center
-                                dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                    focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center
+                                    dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="submit">
                                     Cadastrar
                                 </button>
                             </div>
+                        </form>
                     </div>
 
                 </div>
