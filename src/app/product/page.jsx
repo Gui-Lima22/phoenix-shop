@@ -35,7 +35,19 @@ export default function Product({searchParams: id}) {
     useEffect(() => {
         productService.getById(id.id)
             .then(({ data }) => {
+                const allSizes = ['PP', 'P', 'M', 'G', 'GG', 'XGG'];
+
                 data.color = JSON.parse(data.color).map(color => Colors[color]).join(", ");
+                data.size = allSizes.map(size => {
+                    const find = data.size.find(productSize => productSize.size === size);
+
+                    if (find) {
+                        console.log(find)
+                        return {size, in_stock: find.in_stock}
+                    }
+
+                    return {size, in_stock: false}
+                });
 
                 setProduct(data);
                 setIsLoading(false);
