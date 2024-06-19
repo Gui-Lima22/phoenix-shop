@@ -7,26 +7,25 @@ const ProductService =  {
         return await axios.get(API_URL + "/products/" + id)
             .then((res) => res)
             .catch((err) => {
-                console.error("Failed to fetch product by id:", err);
                 throw err;
             })
     },
 
-    list: async () => {
-        const model = {
-            teamsFilters: null,
-            leaguesFilters: null,
-            colorsFilters: null,
-            orderBy: null
-        }
-
+    list: async (model) => {
         return await axios.post(API_URL + "/products/list", model)
             .then((res) => res)
             .catch((err) => {
-                console.error("Failed to fetch product by id:", err);
                 throw err;
             })
-    }
+    },
+
+    options: async () => {
+        return await axios.get(API_URL + "/products/filterOptions")
+            .then((res) => res)
+            .catch((err) => {
+                throw err;
+            })
+    },
 };
 
 export default ProductService;

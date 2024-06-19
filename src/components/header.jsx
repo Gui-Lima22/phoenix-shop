@@ -1,12 +1,21 @@
 "use client"
 
 import {Fragment, useContext} from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import {Disclosure, Menu, MenuItems, MenuItem, Transition, MenuButton} from '@headlessui/react'
 import {ShoppingCartIcon, UserIcon} from '@heroicons/react/24/outline'
 import {PhoenixContext} from "@/context/phoenix-context";
+import Link from "next/link";
 
 const Header = () => {
-    const {cartList, cookies} = useContext(PhoenixContext);
+    const {cartList, cookies, removeCookie} = useContext(PhoenixContext);
+    const pathName = usePathname();
+    const router = useRouter();
+
+    const logout = () => {
+        removeCookie("access_token");
+        if (pathName.includes("/user")) router.push("/list");
+    }
 
     return (
         <Disclosure as="nav" className="nav">
@@ -15,20 +24,20 @@ const Header = () => {
 
                     <div className="flex flex-1 items-stretch justify-start">
                         <div className="flex flex-shrink-0 items-center">
-                            <a className="cursor-pointer text-gray-600 text-3xl lg:text-4xl" href="/">
+                            <Link className="cursor-pointer text-gray-600 text-3xl lg:text-4xl" href="/">
                                 Phoenix Shop
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <a
-                            type="button" href="/cart"
+                        <Link
+                            type="button" href={"/cart"}
                             className="relative rounded-full p-1 text-gray-900 hover:text-gray-700 focus:outline-none ring-2 ring-gray-800 ring-offset-gray-800"
                         >
                             <span className="absolute -inset-1.5"/>
                             <ShoppingCartIcon className="h-6 w-6" aria-hidden="true"/>
                             {cartList.length > 0 && <span id="cart-count">{cartList.length}</span>}
-                        </a>
+                        </Link>
 
                         <Menu as="div" className="relative ml-5">
                             <div>
@@ -54,27 +63,28 @@ const Header = () => {
                                         cookies.access_token ?
                                             <>
                                                 <MenuItem>
-                                                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
+                                                    <Link href={""}
+                                                        className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
                                                         Meu perfil
-                                                    </a>
+                                                    </Link>
                                                 </MenuItem>
                                                 <MenuItem>
-                                                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
+                                                    <button onClick={logout} className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
                                                         Sair
-                                                    </a>
+                                                    </button>
                                                 </MenuItem>
                                             </>
                                             :
                                             <>
                                                 <MenuItem>
-                                                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200" href="/login">
+                                                    <Link className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200" href={"/login"}>
                                                         Entrar
-                                                    </a>
+                                                    </Link>
                                                 </MenuItem>
                                                 <MenuItem>
-                                                    <a className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200" href="/register">
+                                                    <Link className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200" href={"/register"}>
                                                         Cadastrar
-                                                    </a>
+                                                    </Link>
                                                 </MenuItem>
                                             </>
                                     }

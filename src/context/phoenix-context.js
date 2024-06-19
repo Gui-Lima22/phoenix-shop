@@ -2,13 +2,15 @@
 
 import {createContext, useEffect, useState} from "react";
 import {useCookies} from "react-cookie";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
-export const PhoenixContext = createContext(undefined)
+export const PhoenixContext = createContext(undefined);
 
 export const FilterProvider = ({children}) => {
-    const [priority, setPriority] = useState("Relevance");
     const [cartList, setCartList] = useState([]);
-    const [cookies, setCookie] = useCookies();
+    const [cookies, setCookie, removeCookie] = useCookies();
+
+    const client = new QueryClient();
 
     useEffect(() => {
         const list = JSON.parse(localStorage.getItem('cart-list'));
@@ -18,13 +20,17 @@ export const FilterProvider = ({children}) => {
     }, []);
 
     const setCartStorage = (newValue) => {
-        localStorage.setItem('cart-list', JSON.stringify(newValue));
-        setCartList(newValue);
+        const sort = newValue.sort((a,b) => a.id - b.id);
+
+        localStorage.setItem('cart-list', JSON.stringify(sort));
+        setCartList(sort);
     }
 
     return (
-        <PhoenixContext.Provider value={{priority, setPriority, cartList, setCartStorage, cookies}}>
-            {children}
+        <PhoenixContext.Provider value={{cartList, setCartStorage, cookies, setCookie, removeCookie}}>
+            <QueryClientProvider client={client}>
+                {children}
+            </QueryClientProvider>
         </PhoenixContext.Provider>
     );
 }

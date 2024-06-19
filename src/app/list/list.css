@@ -19,7 +19,6 @@
 }
 
 .card-list img {
-    width: 256px;
     height: 300px;
 }
 
@@ -51,3 +50,11 @@
 .filter {
     background: var(--background-color) !important;
 }
+
+.bg-blue { background-color: #2424ff; }
+.bg-garnet { background-color: #FF5733; }
+.bg-green { background-color: green; }
+.bg-orange { background-color: orange; }
+.bg-red { background-color: red; }
+.bg-yellow { background-color: yellow; }
+.bg-black { background-color: black; }

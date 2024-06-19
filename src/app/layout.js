@@ -1,5 +1,5 @@
 import {FilterProvider} from '@/context/phoenix-context';
-import Header from '@/components-utils/header';
+import Header from '@/components/header';
 import {Saira} from 'next/font/google'
 import "./globals.css";
 

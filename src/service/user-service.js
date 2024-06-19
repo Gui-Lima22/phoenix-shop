@@ -3,11 +3,18 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const UserService = {
-    save: (formData) => {
-        axios.post(API_URL + "/user/create")
+    save: async (model) => {
+        return await axios.post(API_URL + "/auth/create", model)
             .then((res) => res)
             .catch((err) => {
-                console.error("Failed to fetch product by id:", err);
+                throw err
+            });
+    },
+
+    login: async (model) => {
+        return await axios.post(API_URL + "/auth/login", model)
+            .then((res) => res)
+            .catch((err) => {
                 throw err;
             })
     }
