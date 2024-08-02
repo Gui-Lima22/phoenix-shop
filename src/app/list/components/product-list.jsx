@@ -1,31 +1,27 @@
 "use client"
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import Loader from "@/components/loader";
 import productService from "@/service/product-service";
+import {useQuery} from "@tanstack/react-query";
 
 const ProductsList = ({sort, filters}) => {
-    const [products, setProducts] = useState(undefined);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        productService.list({filters, sort}).then(({data}) => {
-            setProducts(data);
-            setIsLoading(false);
-        });
-    }, [filters, sort]);
+    const {data, isLoading} = useQuery({
+        queryFn: () => productService.list({filters, sort}).then(({data}) => data),
+        queryKey: ["list", {filters, sort}]
+    });
 
     return (
         <>
             {isLoading && <Loader/>}
 
             {
-                products &&
+                data &&
                 <div className="container justify-center">
                     {
-                        products.map(item =>
+                        data.map(item =>
                             <React.Fragment key={item.id}>
                                 <Link className="card-list cursor-pointer shadow" href={"/product?id=" + item.id}>
                                     <Image
@@ -49,7 +45,7 @@ const ProductsList = ({sort, filters}) => {
             }
 
             {
-                products && !products.length &&
+                data && !data.length &&
                 <>
                     <div role="alert"
                          className="relative block w-full px-4 py-4 text-base text-gray-700 bg-white rounded-lg font-regular mt-4 shadow">

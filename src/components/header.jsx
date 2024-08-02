@@ -14,7 +14,7 @@ const Header = () => {
 
     const logout = () => {
         removeCookie("access_token");
-        if (pathName.includes("/user")) router.push("/list");
+        if (pathName.includes("user")) router.push("/list");
     }
 
     return (
@@ -63,7 +63,7 @@ const Header = () => {
                                         cookies.access_token ?
                                             <>
                                                 <MenuItem>
-                                                    <Link href={""}
+                                                    <Link href={"/my-user"}
                                                         className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
                                                         Meu perfil
                                                     </Link>

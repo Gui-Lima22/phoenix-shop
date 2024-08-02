@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
 import productService from '@/service/product-service';
+import {useQuery} from "@tanstack/react-query";
 
 const useProductFilters = () => {
-    const [options, setOptions] = useState({});
     const [teams, setTeams] = useState([]);
     const [colors, setColors] = useState([]);
     const [sizes, setSizes] = useState([]);
     const [filters, setFilters] = useState([]);
 
-    useEffect(() => {
-        productService.options().then(({ data }) => {
-            setOptions({
-                colors: data.color,
-                teams: data.teams,
-                sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']
-            });
-        });
-    }, []);
+    const {data} = useQuery({
+        queryFn: () => productService.options().then(({ data }) => (
+            {colors: data.color, teams: data.teams, sizes: ['PP', 'P', 'M', 'G', 'GG', 'XGG']}
+        )),
+        queryKey: ["options"]
+    });
 
     useEffect(() => {
         const preparedFilters = [];
@@ -31,7 +28,7 @@ const useProductFilters = () => {
     }, [teams, colors, sizes]);
 
     return {
-        options,
+        options: data,
         teams, setTeams,
         colors, setColors,
         sizes, setSizes,

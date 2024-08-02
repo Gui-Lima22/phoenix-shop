@@ -3,14 +3,17 @@
 import {createContext, useEffect, useState} from "react";
 import {useCookies} from "react-cookie";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import axios from "axios";
 
 export const PhoenixContext = createContext(undefined);
+
+const client = new QueryClient();
+
+axios.defaults.withCredentials = true
 
 export const FilterProvider = ({children}) => {
     const [cartList, setCartList] = useState([]);
     const [cookies, setCookie, removeCookie] = useCookies();
-
-    const client = new QueryClient();
 
     useEffect(() => {
         const list = JSON.parse(localStorage.getItem('cart-list'));

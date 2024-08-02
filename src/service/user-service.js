@@ -17,6 +17,22 @@ const UserService = {
             .catch((err) => {
                 throw err;
             })
+    },
+
+    getUserLogged: async () => {
+        return await axios.get(API_URL + "/users/getUserLogged")
+            .then((res) => res)
+            .catch((err) => {
+                throw err;
+            })
+    },
+
+    edit: async (model) => {
+        return await axios.post(API_URL + "/users/update", model)
+            .then((res) => res)
+            .catch((err) => {
+                throw err;
+            })
     }
 };
 

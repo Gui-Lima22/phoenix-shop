@@ -7,6 +7,7 @@ import {PhoenixContext} from "@/context/phoenix-context";
 import userService from "@/service/user-service";
 import LoginBackground from "../../../public/background/login-background.jpg";
 import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const {setCookie} = useContext(PhoenixContext);
