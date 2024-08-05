@@ -20,7 +20,7 @@ const UserService = {
     },
 
     getUserLogged: async () => {
-        return await axios.get(API_URL + "/users/getUserLogged")
+        return await axios.get(API_URL + "/auth/getUserLogged")
             .then((res) => res)
             .catch((err) => {
                 throw err;
@@ -28,11 +28,31 @@ const UserService = {
     },
 
     edit: async (model) => {
-        return await axios.post(API_URL + "/users/update", model)
+        return await axios.post(API_URL + "/user/update", model)
             .then((res) => res)
             .catch((err) => {
                 throw err;
             })
+    },
+
+    authValidate: async (token) => {
+        const requestOptions = {
+            method: "POST",
+            headers: new Headers(),
+            body: token,
+            redirect: "follow"
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/auth/validate`, requestOptions);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return await response.text();
+        } catch (err) {
+            throw new Error('Failed to validate token');
+        }
     }
 };
 

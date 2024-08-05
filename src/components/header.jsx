@@ -6,6 +6,7 @@ import {Disclosure, Menu, MenuItems, MenuItem, Transition, MenuButton} from '@he
 import {ShoppingCartIcon, UserIcon} from '@heroicons/react/24/outline'
 import {PhoenixContext} from "@/context/phoenix-context";
 import Link from "next/link";
+import {jwtDecode} from "jwt-decode";
 
 const Header = () => {
     const {cartList, cookies, removeCookie} = useContext(PhoenixContext);
@@ -62,6 +63,15 @@ const Header = () => {
                                     {
                                         cookies.access_token ?
                                             <>
+                                                {
+                                                    jwtDecode(cookies.access_token).role === "ADMIN" &&
+                                                    <MenuItem>
+                                                        <Link href={"/management"}
+                                                              className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
+                                                            Gerenciamento
+                                                        </Link>
+                                                    </MenuItem>
+                                                }
                                                 <MenuItem>
                                                     <Link href={"/my-user"}
                                                         className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
