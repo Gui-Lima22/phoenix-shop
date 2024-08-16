@@ -24,6 +24,11 @@
     --shapes: #DCE2E6;
 }
 
+html.dark {
+    --tw-bg-opacity: 1;
+    --background-color: rgb(30 41 59 / var(--tw-bg-opacity))
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
@@ -75,7 +80,7 @@ body {
 }
 
 body, .nav {
-    background: var(--background-color) !important;
+    background: var(--background-color);
 }
 
 .main {
@@ -99,6 +104,10 @@ body, .nav {
     height: 2px;
     width: 100%;
     background: linear-gradient(90deg, transparent, #9c9c9c, transparent);
+}
+
+.z-99 {
+    z-index: 99;
 }
 
 #cart-count {

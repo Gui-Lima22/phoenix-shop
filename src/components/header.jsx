@@ -15,7 +15,7 @@ const Header = () => {
 
     const logout = () => {
         removeCookie("access_token");
-        if (pathName.includes("user")) router.push("/list");
+        if (pathName.includes("my-user")) router.push("/list");
     }
 
     return (
@@ -25,25 +25,28 @@ const Header = () => {
 
                     <div className="flex flex-1 items-stretch justify-start">
                         <div className="flex flex-shrink-0 items-center">
-                            <Link className="cursor-pointer text-gray-600 text-3xl lg:text-4xl" href="/">
+                            <Link className="cursor-pointer text-gray-600 dark:text-slate-50 text-3xl lg:text-4xl" href="/">
                                 Phoenix Shop
                             </Link>
                         </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <Link
-                            type="button" href={"/cart"}
-                            className="relative rounded-full p-1 text-gray-900 hover:text-gray-700 focus:outline-none ring-2 ring-gray-800 ring-offset-gray-800"
-                        >
-                            <span className="absolute -inset-1.5"/>
-                            <ShoppingCartIcon className="h-6 w-6" aria-hidden="true"/>
-                            {cartList.length > 0 && <span id="cart-count">{cartList.length}</span>}
-                        </Link>
+                        {
+                            !pathName.includes("management") &&
+                            <Link
+                                type="button" href={"/cart"}
+                                className="relative rounded-full p-1 text-gray-900 hover:text-gray-700 dark:text-slate-50 dark:hover:text-slate-300 focus:outline-none ring-2 ring-gray-800 ring-offset-gray-800 dark:ring-slate-50 dark:ring-offset-slate-50"
+                            >
+                                <span className="absolute -inset-1.5"/>
+                                <ShoppingCartIcon className="h-6 w-6" aria-hidden="true"/>
+                                {cartList.length > 0 && <span id="cart-count">{cartList.length}</span>}
+                            </Link>
+                        }
 
                         <Menu as="div" className="relative ml-5">
                             <div>
                                 <MenuButton
-                                    className="relative rounded-full p-1 text-gray-900 hover:text-gray-700 focus:outline-none ring-2 ring-gray-800 ring-offset-gray-800">
+                                    className="relative rounded-full p-1 text-gray-900 hover:text-gray-700 dark:text-slate-50 dark:hover:text-slate-300 focus:outline-none ring-2 ring-gray-800 ring-offset-gray-800 dark:ring-slate-50 dark:ring-offset-slate-50">
                                     <span className="absolute -inset-1.5"/>
                                     <UserIcon className="h-6 w-6" aria-hidden="true"/>
                                 </MenuButton>
@@ -69,6 +72,15 @@ const Header = () => {
                                                         <Link href={"/management"}
                                                               className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
                                                             Gerenciamento
+                                                        </Link>
+                                                    </MenuItem>
+                                                }
+                                                {
+                                                    pathName.includes("management") &&
+                                                    <MenuItem>
+                                                        <Link href={"/list"}
+                                                              className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-gray-200">
+                                                            Lista de produtos
                                                         </Link>
                                                     </MenuItem>
                                                 }

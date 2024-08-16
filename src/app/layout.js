@@ -1,5 +1,4 @@
-import {FilterProvider} from '@/context/phoenix-context';
-import Header from '@/components/header';
+import {PhoenixProvider} from '@/context/phoenix-context';
 import {Saira} from 'next/font/google'
 import "./globals.css";
 
@@ -17,10 +16,9 @@ export default function RootLayout({children}) {
     return (
         <html lang="en">
         <body className={saira.className}>
-        <FilterProvider>
-            <Header/>
+        <PhoenixProvider>
             {children}
-        </FilterProvider>
+        </PhoenixProvider>
         </body>
         </html>
     );
