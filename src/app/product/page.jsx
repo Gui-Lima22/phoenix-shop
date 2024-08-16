@@ -3,15 +3,14 @@
 import React, {useContext, useState} from 'react'
 import {useRouter} from "next/navigation";
 import {RadioGroup, Select} from '@headlessui/react'
-import {ChevronLeftIcon} from "@heroicons/react/16/solid";
 import {PhoenixContext} from "@/context/phoenix-context";
 import productService from "@/service/product-service";
 import Loader from "@/components/loader";
 import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Image from "next/image";
-import Link from "next/link";
 import {useQuery} from "@tanstack/react-query";
+import PreviousBtn from "@/components/previousBtn";
 
 class Colors {
     static get black() { return 'Preto'; }
@@ -24,7 +23,7 @@ class Colors {
     static get orange() { return 'Laranja'; }
 }
 
-export default function Product({searchParams: id}) {
+const Product = ({searchParams: id}) => {
     const {cartList, setCartStorage} = useContext(PhoenixContext);
     const router = useRouter();
 
@@ -56,7 +55,7 @@ export default function Product({searchParams: id}) {
         setQuantity(parseInt(value));
     }
 
-    const addToCart = (buy = false) => {
+    const addToCart = (buy) => {
         if (!selectedSize.size) {
             toast.warning("Selecione um tamanho.");
             return;
@@ -76,10 +75,12 @@ export default function Product({searchParams: id}) {
 
         const existingItem = newCartList.find(item => item.id === newItem.id && item.size === newItem.size);
 
-        if (existingItem)
+        if (existingItem) {
             existingItem.quantity += quantity;
-        else
+            existingItem.totalCost = existingItem.price * existingItem.quantity;
+        } else {
             newCartList.push(newItem);
+        }
 
         setCartStorage(newCartList);
 
@@ -90,11 +91,9 @@ export default function Product({searchParams: id}) {
         <>
             <ToastContainer/>
             <hr className="spacer"/>
-            <div className="return-btn lg:ms-10 my-5">
-                <Link href={"/list"} className="flex text-gray-600" role="button">
-                    <ChevronLeftIcon className="h-6 w-6" aria-hidden="true"/> Voltar
-                </Link>
-            </div>
+
+            <PreviousBtn />
+
             {isLoading && <Loader/>}
 
             {
@@ -223,7 +222,7 @@ export default function Product({searchParams: id}) {
 
 
                             <button
-                                type="button" onClick={addToCart}
+                                type="button" onClick={() => addToCart(false)}
                                 className="mt-5 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-3 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                             >
                                 Adicionar ao carrinho
@@ -260,3 +259,5 @@ export default function Product({searchParams: id}) {
         </>
     )
 }
+
+export default Product;

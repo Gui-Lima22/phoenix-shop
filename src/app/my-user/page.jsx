@@ -5,9 +5,8 @@ import {toast, ToastContainer} from "react-toastify";
 import {useQuery} from "@tanstack/react-query";
 import userService from "@/service/user-service";
 import Loader from "@/components/loader";
-import {ChevronLeftIcon} from "@heroicons/react/16/solid";
-import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
+import PreviousBtn from "@/components/previousBtn";
 
 const MyUser = () => {
     const [user, setUser] = useState({ login: "", email: "", name: "", password: "" });
@@ -56,11 +55,9 @@ const MyUser = () => {
         <>
             <ToastContainer/>
             <hr className="spacer"/>
-            <div className="return-btn lg:ms-10 my-5">
-                <Link href={"/list"} className="flex text-gray-600" role="button">
-                    <ChevronLeftIcon className="h-6 w-6" aria-hidden="true"/> Voltar
-                </Link>
-            </div>
+
+            <PreviousBtn />
+
             {isLoading && <Loader/>}
 
             {

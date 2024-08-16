@@ -19,7 +19,7 @@ const Login = () => {
         userService.login(model)
             .then(({data}) => {
                 setCookie("access_token", data);
-                router.push('/list')
+                router.back()
             })
             .catch(() => toast.error("Não foi possível fazer o Login."));
     }

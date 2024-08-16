@@ -47,8 +47,8 @@ const ProductsList = ({sort, filters}) => {
             {
                 data && !data.length &&
                 <>
-                    <div role="alert"
-                         className="relative block w-full px-4 py-4 text-base text-gray-700 bg-white rounded-lg font-regular mt-4 shadow">
+                    <div role="alert" id="not-found-alert"
+                         className="relative block w-full px-4 py-4 text-gray-700 bg-white rounded-lg mt-4 shadow">
                         <div className="mr-12">Nenhum produto encontrado.</div>
                     </div>
                 </>
