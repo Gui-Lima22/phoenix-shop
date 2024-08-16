@@ -58,3 +58,8 @@
 .bg-red { background-color: red; }
 .bg-yellow { background-color: yellow; }
 .bg-black { background-color: black; }
+
+#not-found-alert {
+    background: rgba(255, 255, 255, 0.4);
+    text-align: center;
+}

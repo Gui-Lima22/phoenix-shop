@@ -8,17 +8,14 @@ import Link from "next/link";
 const CartList = () => {
     const {cartList, setCartStorage} = useContext(PhoenixContext);
 
-    const changeQuantity = (element, id) => {
-        const {value} = element.target;
+    const changeQuantity = ({ target: { value } }, id) => {
+        const newQuantity = Number(value);
 
-        const newCartList = cartList.map(item => {
-            if (item.id === id) {
-                const quantity = parseInt(value, 10);
-                return {...item, quantity, totalCost: item.price * quantity};
-            }
+        if (isNaN(newQuantity) || newQuantity < 0) return;
 
-            return item;
-        });
+        const newCartList = cartList.map(item =>
+            item.id === id ? { ...item, quantity: newQuantity, totalCost: item.price * newQuantity } : item
+        );
 
         setCartStorage(newCartList);
     }

@@ -26,6 +26,14 @@ const ProductService =  {
                 throw err;
             })
     },
+
+    purchase: async (model) => {
+        return await axios.post(API_URL + "/products/purchase", model)
+            .then((res) => res)
+            .catch((err) => {
+                throw err;
+            })
+    }
 };
 
 export default ProductService;
