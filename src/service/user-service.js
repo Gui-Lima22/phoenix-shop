@@ -28,7 +28,9 @@ const UserService = {
     },
 
     edit: async (model) => {
-        return await axios.post(API_URL + "/user/update", model)
+        return await axios.post(API_URL + "/user/update", model,{
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
             .then((res) => res)
             .catch((err) => {
                 throw err;

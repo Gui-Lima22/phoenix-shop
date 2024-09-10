@@ -10,7 +10,13 @@ import ManagementNav from "@/components/managementNav";
 
 export const PhoenixContext = createContext(undefined);
 
-const client = new QueryClient();
+const client = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false
+        },
+    },
+});
 
 axios.defaults.withCredentials = true
 

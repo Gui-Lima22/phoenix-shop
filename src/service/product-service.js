@@ -28,7 +28,9 @@ const ProductService =  {
     },
 
     purchase: async (model) => {
-        return await axios.post(API_URL + "/products/purchase", model)
+        return await axios.post(API_URL + "/products/purchase", model, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
             .then((res) => res)
             .catch((err) => {
                 throw err;

@@ -51,7 +51,7 @@ const Login = () => {
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Login</label>
                                     <input type="text" id="login" name="login" className="mt-1 p-2 w-full border border-gray-500
                                     rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                    focus:ring-gray-300 transition-colors duration-300"/>
+                                    focus:ring-gray-300 transition-colors duration-300" autoFocus={true}/>
                                 </div>
                                 <div>
                                     <div className="flex items-center justify-between">

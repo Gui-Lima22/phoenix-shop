@@ -20,7 +20,11 @@ const Cart = () => {
 
         const model = cartList.map(item => ({id: item.id.split("-")[0], quantity: item.quantity, size: item.size}));
 
-        productService.purchase(model)
+        const formData = new FormData();
+        formData.append("products", JSON.stringify(model));
+        formData.append("token", cookies.access_token);
+
+        productService.purchase(formData)
             .then(() => {
                 setCartStorage([]);
                 router.push("/list");

@@ -59,7 +59,7 @@ const Register = () => {
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
                                     <input type="text" id="name" name="name" className="mt-1 p-2 w-full border border-gray-500
                                         rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2
-                                        focus:ring-gray-300 transition-colors duration-300"/>
+                                        focus:ring-gray-300 transition-colors duration-300" autoFocus={true}/>
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>

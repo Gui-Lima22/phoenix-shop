@@ -36,13 +36,10 @@ const MyUser = () => {
         }));
     };
 
-    const submit = () => {
-        const { login, email, name, password } = user;
+    const submit = (formData) => {
+        formData.append("id", data.id);
 
-        const model = { id: data.id, login, email, name };
-        if (password) model.password = password;
-
-        userService.edit(model)
+        userService.edit(formData)
             .then(() => {
                 toast.success("Salvo com sucesso.");
             })
